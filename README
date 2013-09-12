@@ -1,0 +1,64 @@
+Bonjour Aliases
+==================
+
+A project born of the burning desire to be backwards compatible --
+served with a dash of bitterness.
+
+Quick Start
+--------------
+
+On Debian, install daemontools or runit and symlink this directory under
+/etc/service::
+
+    apt-get install daemontools-run
+    apt-get install libavahi-compat-libdnssd1 python-pip
+    pip install pybonjour
+    update-service --add /root/bonjour_aliases/ bonjour_aliases
+
+See, if, on a different machine in the same physical net, you can see
+the aliases::
+
+    avahi-browse -a | grep [pattern]
+
+Check status, shutdown and start service::
+
+    svstat /etc/service/bonjour_aliases
+    svc -d /etc/service/bonjour_aliases
+    svc -u /etc/service/bonjour_aliases
+
+Happy?
+
+
+Long, Winding Story
+--------------------------------------------------------------------
+
+
+This project currently solves one and only one scenario: It creates
+name-aliases to Bonjour records from already published records.  Say you
+are running a printserver and it publishes your printers like this:
+
+    printer1 @ my.domain
+
+You discover that, after an innocuous update, the very same printserver,
+for whatever reasons, starts publishing the very same printers with
+records named like this[0]:
+
+    printer1 @ my
+
+Being the good sysadmin that I am, I wanted my users to not suffer the
+inconvenience of discovering that they'd have to remove all Bonjour
+printers only to add them again (thereby possibly losing their precious
+settings).
+
+The project conveniently includes a 'run' file that's suitable for
+supervisors such as daemontools or runit.
+
+[Note: Currently, names are hardcoded in the source code -- please do
+contact me if you want a more generic version!]
+
+
+2013-09-05, by Hagen Fuchs
+
+[0] The printserver in question is the excellent CUPS, updating
+    from version 1.5 to 1.6.
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+echo Starting Bonjour Aliases
+exec python bonjour_aliases.py
