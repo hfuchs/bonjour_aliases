@@ -4,21 +4,57 @@ Bonjour Aliases
 A project born of the burning desire to be backwards compatible --
 served with a dash of bitterness.
 
+Motivation: CUPS 1.6 started to Zeroconf/Avahi/Bonjour-advertise
+printers as "printer @ server" instead of the old "printer
+@ server.domain.com", thereby making existing printer entries in MacOS
+clients unusable.  This script eases the transition period between the
+two standards (at least it did for me and my users for all I know).
+
+WARNING: At the moment, all server name patterns are hard-coded, so this
+very much only serves my needs.  If Bonjour aliases sound like a good
+idea to you, I suggest you simply email me and I'll be happy to make
+this a all-purpose, all-weather software product.
+
+WARNING 2: This script places a heavy burden on DBUS.  I have seen it
+crashing a couple of times on a machine that serves multiple interfaces
+(each Bonjour record needs to be duplicated for every interface).
+Caveat emptor!
+
+While I'm at it...
+
+
+Disclaimer and Licence
+-------------------------
+
+As Pilates once put it: if you choose to use this software, you're
+completely on your own.  You're responsible for any damage that you
+incure by using this code in whatever way.  "No fitness for a particular
+purpose..." you know the drill.
+
+Licence: Newest GPL.  See <https://www.gnu.org/licenses/gpl.html>
+This licence covers all code in this repository.
+
+
 Quick Start
 --------------
 
-On Debian, install daemontools or runit and symlink this directory under
-/etc/service::
+On Debian, install the requisites and verify that it's doing what it's
+supposed to::
 
-    apt-get install daemontools-run
     apt-get install libavahi-compat-libdnssd1 python-pip
     pip install pybonjour
-    update-service --add /root/bonjour_aliases/ bonjour_aliases
+    python bonjour_aliases.py
 
 See, if, on a different machine in the same physical net, you can see
 the aliases::
 
     avahi-browse -a | grep [pattern]
+
+If happy, install daemontools or runit and symlink this directory under
+/etc/service::
+
+    apt-get install daemontools-run
+    update-service --add /root/bonjour_aliases/ bonjour_aliases
 
 Check status, shutdown and start service::
 
@@ -26,12 +62,12 @@ Check status, shutdown and start service::
     svc -d /etc/service/bonjour_aliases
     svc -u /etc/service/bonjour_aliases
 
-Happy?
+After a few days start sending friendly bug reports (to me) and possibly
+remind your users to switch their printer entries to the new convention.
 
 
 Long, Winding Story
 --------------------------------------------------------------------
-
 
 This project currently solves one and only one scenario: It creates
 name-aliases to Bonjour records from already published records.  Say you
