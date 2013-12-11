@@ -4,11 +4,14 @@ Bonjour Aliases
 A project born of the burning desire to be backwards compatible --
 served with a dash of bitterness.
 
-Motivation: CUPS 1.6 started to Zeroconf/Avahi/Bonjour-advertise
-printers as "printer @ server" instead of the old "printer
-@ server.domain.com", thereby making existing printer entries in MacOS
-clients unusable.  This script eases the transition period between the
-two standards (at least it did for me and my users for all I know).
+Motivation: CUPS 1.6 started to advertise printers as "printer @ server"
+instead of the old "printer @ server.domain.com", thereby making
+existing printer entries in MacOS clients unusable.  This script eases
+the transition period between the two standards (at least it did for me
+and my users for all I know).
+
+I elaborated a bit on the corresponding Debian bug report,
+<http://bugs.debian.org/717245>.
 
 WARNING: At the moment, all server name patterns are hard-coded, so this
 very much only serves my needs.  If Bonjour aliases sound like a good
