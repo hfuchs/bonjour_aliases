@@ -1,4 +1,5 @@
 # 2013-07-24, Created by Hagen Fuchs <code@hfuchs.net>
+# Licenced under the GPL <https://www.gnu.org/licenses/gpl.html>.
 #
 # 2013-07-25, Inital code taken from
 # <http://stackoverflow.com/questions/3430245/how-to-develop-an-avahi-client-server>
